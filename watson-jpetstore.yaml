@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: mmssearch
-        image: <REGISTRY NAMESPACE>/mmssearch
+        image: svennam92/mmssearch
         ports:
         - containerPort: 8080
         env:
@@ -48,7 +48,7 @@ metadata:
   name: jpetstore-ingress-mms
 spec:
   rules:
-  - host: mmssearch.<CLUSTER DOMAIN>
+  - host: mmssearch.kubecon4.eu-de.containers.appdomain.cloud
     http:
       paths:
       - path: /

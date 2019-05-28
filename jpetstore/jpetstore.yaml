@@ -3,7 +3,7 @@ apiVersion: extensions/v1beta1
 metadata:
   name: jpetstoreweb
 spec:
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: jpetstoreweb
-        image: <REGISTRY NAMESPACE>/jpetstoreweb
+        image: svennam92/jpetstoreweb
         env:
           - name: VERSION
             value: "1"
@@ -52,7 +52,7 @@ spec:
     spec:
       containers:
       - name: jpetstoredb
-        image: <REGISTRY NAMESPACE>/jpetstoredb
+        image: svennam92/jpetstoredb
         ports:
         - containerPort: 3306
         env:
@@ -82,23 +82,10 @@ metadata:
   name: jpetstore-ingress
 spec:
   rules:
-  - host: jpetstore.<CLUSTER DOMAIN>
+  - host: jpetstore.kubecon4.eu-de.containers.appdomain.cloud
     http:
       paths:
       - path: /
         backend:
           serviceName: web
           servicePort: 80
----
-kind: EgressRule
-apiVersion: config.istio.io/v1alpha2
-metadata:
-  name: watson-egress-rule
-spec:
-  destination:
-    service: gateway-a.watsonplatform.net
-  ports:
-    - port: 80
-      protocol: http
-    - port: 443
-      protocol: https
